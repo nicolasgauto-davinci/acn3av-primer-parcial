@@ -23,7 +23,7 @@ include_once 'admin/productos.php';
                     echo "<p class=\"marcaProducto\"><i>" . $producto['marca'] . "</i></p>";
                     echo "<p class=\"precioProducto\"><b>$ " . number_format($producto['precio'], 0, ',', '.') . "</b></p>";
                     if ($producto['ranking'] !== null) {
-                        echo "<p>Ranking: Top " . $producto['ranking'] . "</p>";
+                        echo "<p>★" . $producto['ranking'] . "</p>";
                     }
                     echo "</a>";
                     echo "</article>";

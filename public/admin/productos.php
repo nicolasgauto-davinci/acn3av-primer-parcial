@@ -4,6 +4,19 @@ include_once 'categorias.php';
 include_once 'marcas.php';
 include_once 'comentarios.php';
 
+function calcularRanking($comentariosProducto){
+    $cantidad = count($comentariosProducto);
+    if ($cantidad === 0) {
+        return null; // No hay comentarios, no se puede calcular ranking
+    }
+
+    $sumaValoraciones = 0;
+    foreach ($comentariosProducto as $comentario) {
+        $sumaValoraciones += $comentario['valoracion'];
+    }
+    return round($sumaValoraciones / $cantidad, 1);
+}
+
 $productos = array(
     array(
         "id" => 1,
@@ -11,7 +24,7 @@ $productos = array(
         "marca" => $listaMarcas[0], // "Lancôme"
         "precio" => 19999,
         "imagen" => "./assets/img/producto1.jpg",
-        "ranking" => 1,
+        "ranking" => calcularRanking($listaComentarios[1]), // Calcula el ranking basado en los comentarios del producto 1
         "destacado" => true,
         "descripcion" => "Perfume Idôle Edp 100 Ml Lancôme",
         "modelo" => "Idôle",
@@ -28,7 +41,7 @@ $productos = array(
         "marca" => $listaMarcas[1], // "Natura"
         "precio" => 19999,
         "imagen" => "./assets/img/producto2.jpg",
-        "ranking" => 2,
+        "ranking" => calcularRanking($listaComentarios[2]), // Calcula el ranking basado en los comentarios del producto 2
         "destacado" => true,
         "descripcion" => "Perfume Natura Aura Alba",
         "modelo" => "Aura Alba",
@@ -45,7 +58,7 @@ $productos = array(
         "marca" => $listaMarcas[2], // "Philips"
         "precio" => 19999,
         "imagen" => "./assets/img/producto3.jpg",
-        "ranking" => 3,
+        "ranking" => calcularRanking($listaComentarios[3]), // Calcula el ranking basado en los comentarios del producto 3
         "destacado" => true,
         "descripcion" => "Depiladora Ipl Philips Lumea Prestige Bri947",
         "modelo" => "Lumea Prestige",
@@ -62,7 +75,7 @@ $productos = array(
         "marca" => $listaMarcas[3], // "Antonio Banderas"
         "precio" => 19999,
         "imagen" => "./assets/img/producto4.jpg",
-        "ranking" => 4,
+        "ranking" => calcularRanking($listaComentarios[4]), // Calcula el ranking basado en los comentarios del producto 4
         "destacado" => true,
         "descripcion" => "Perfume Her Secret Pink Absolu Eau De Parfum Antonio Banderas 80ml",
         "modelo" => "Her Secret",
@@ -79,7 +92,7 @@ $productos = array(
         "marca" => $listaMarcas[4], // "Mantra Beauty"
         "precio" => 19999,
         "imagen" => "./assets/img/producto5.jpg",
-        "ranking" => 5,
+        "ranking" => calcularRanking($listaComentarios[5]), // Calcula el ranking basado en los comentarios del producto 5
         "destacado" => true,
         "descripcion" => "Modelador Multifunción Mantra Air Nova Nude",
         "modelo" => "Air Nova",
@@ -96,7 +109,7 @@ $productos = array(
         "marca" => $listaMarcas[0], // "Lancôme"
         "precio" => 19999,
         "imagen" => "./assets/img/producto6.jpg",
-        "ranking" => null, // El producto 6 no tenía ranking en tu código original
+        "ranking" => calcularRanking($listaComentarios[6]), // Calcula el ranking basado en los comentarios del producto 6
         "destacado" => true,
         "descripcion" => "Set Renergie Triple Serum Lancôme 50 Ml",
         "modelo" => "Renergie",
