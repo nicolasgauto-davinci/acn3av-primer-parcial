@@ -1,5 +1,5 @@
 <?php
-
+include_once 'admin/productos.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,48 +13,22 @@
     <?php include_once '../app/includes/header_public.php'; ?>
     <main>
         <h1>Productos Destacados</h1>
-        <section>
-            <article>
-                <a><img src="./assets/img/producto1.jpg" alt="Producto 1"></a>
-                <p class="nombreProducto"><strong>Perfume Idôle Edp 100 Ml Lancôme</strong></p>
-                <p class="marcaProducto"><i>Lancôme</i></p>
-                <p class="precioProducto"><b>$ 19.999</b></p>
-                <p>Ranking: Top 1</p>
-            </article>
-            <article>
-                <a><img src="./assets/img/producto2.jpg" alt="Producto 2"></a>
-                <p class="nombreProducto"><strong>Perfume Natura Aura Alba</strong></p>
-                <p class="marcaProducto"><i>Natura</i></p>
-                <p class="precioProducto"><b>$ 19.999</b></p>
-                <p>Ranking: Top 2</p>
-            </article>
-            <article>
-                <a><img src="./assets/img/producto3.jpg" alt="Producto 3"></a>
-                <p class="nombreProducto"><strong>Depiladora Ipl Philips Lumea Prestige Bri947</strong></p>
-                <p class="marcaProducto"><i>Philips</i></p>
-                <p class="precioProducto"><b>$ 19.999</b></p>
-                <p>Ranking: Top 3</p>
-            </article>
-            <article>
-                <a><img src="./assets/img/producto4.jpg" alt="Producto 4"></a>
-                <p class="nombreProducto"><strong>Perfume Her Secret Pink Absolu Eau De Parfum Antonio Banderas 80ml</strong></p>
-                <p class="marcaProducto"><i>Antonio Banderas</i></p>
-                <p class="precioProducto"><b>$ 19.999</b></p>
-                <p>Ranking: Top 4</p>
-            </article>
-            <article>
-                <a><img src="./assets/img/producto5.jpg" alt="Producto 5"></a>
-                <p class="nombreProducto"><strong>Modelador Multifunción Mantra Air Nova Nude</strong></p>
-                <p class="marcaProducto"><i>Mantra Beauty</i></p>
-                <p class="precioProducto"><b>$ 19.999</b></p>
-                <p>Ranking: Top 5</p>
-            </article>
-            <article>
-                <a><img src="./assets/img/producto6.jpg" alt="Producto 6"></a>
-                <p class="nombreProducto"><strong>Set Renergie Triple Serum Lancôme 50 Ml</strong></p>
-                <p class="marcaProducto"><i>Lancôme</i></p>
-                <p class="precioProducto"><b>$ 19.999</b></p>
-            </article>
+        <section class="productos-destacados">
+            <?php foreach ($productos as $producto) { 
+                 if ($producto['destacado'] == true) { 
+                    echo "<article>";
+                    echo "<a href=\"./detalle_producto.php?id=" . $producto['id'] . "\">";
+                    echo "<img src=\"" . $producto['imagen'] . "\" alt=\"" . $producto['nombre'] . "\">";
+                    echo "<p class=\"nombreProducto\"><strong>" . $producto['nombre'] . "</strong></p>";
+                    echo "<p class=\"marcaProducto\"><i>" . $producto['marca'] . "</i></p>";
+                    echo "<p class=\"precioProducto\"><b>$ " . number_format($producto['precio'], 0, ',', '.') . "</b></p>";
+                    if ($producto['ranking'] !== null) {
+                        echo "<p>Ranking: Top " . $producto['ranking'] . "</p>";
+                    }
+                    echo "</a>";
+                    echo "</article>";
+                }
+            } ?>
         </section>
     </main>
 </body>
