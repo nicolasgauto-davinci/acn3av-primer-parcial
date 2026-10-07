@@ -7,6 +7,7 @@
 </head>
 <body>
     <header>
+        <img src="/public/assets/img/logo.jpg" alt="Logo">
         <a href="/public/home.php">Home</a>
         <a href="/public/productos">Productos</a>
         <a href="/public/contacto.php">Contacto</a>
