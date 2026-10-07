@@ -7,10 +7,13 @@
 </head>
 <body>
     <header>
-        <img src="/public/assets/img/logo.jpg" alt="Logo">
-        <a href="/public/home.php">Home</a>
-        <a href="/public/productos">Productos</a>
-        <a href="/public/contacto.php">Contacto</a>
+        <img class="logo" src="./assets/img/logo.jpg" alt="Logo">
+        <nav>
+            <a href="./home.php">Home</a>
+            <a href="./productos.php">Productos</a>
+            <a href="./contacto.php">Contacto</a>
+        </nav>
+        
     </header>
 </body>
 </html>
