@@ -1,0 +1,24 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: auto;
+    margin: 50px;
+    text-align: justify;
+}
+
+header {
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #f2f2f2;
+}
+
+.logo{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
