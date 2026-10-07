@@ -6,8 +6,9 @@ include_once 'comentarios.php';
 
 function calcularRanking($comentariosProducto){
     $cantidad = count($comentariosProducto);
+
     if ($cantidad === 0) {
-        return null; // No hay comentarios, no se puede calcular ranking
+        return 5; // No hay comentarios, no se puede calcular ranking
     }
 
     $sumaValoraciones = 0;
