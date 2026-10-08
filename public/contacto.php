@@ -45,6 +45,6 @@ session_start();
                 <input type="submit" value="Enviar">
             </form>
         </section>
-    </ma    in>
+    </main>
 </body>
 </html>
