@@ -28,3 +28,29 @@ article a img{
     height: auto;
     object-fit: cover;
 }
+
+.tablaProductos {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tablaProductos th:first-child,
+.tablaProductos td:first-child {
+    width: 8%;
+}
+
+.tablaProductos tbody tr td img {
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+@media (width <= 500px){
+    .tablaProductos th:first-child,
+    .tablaProductos td:first-child {
+        width: 15%;
+    }
+}
