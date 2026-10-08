@@ -8,10 +8,10 @@
 </head>
 <body>
     <header>
-        <img class="logo" src="./assets/img/logo.jpg" alt="Logo">
+        <a href="./home.php"><img class="logo" src="./assets/img/logo.jpg" alt="Logo"></a>
         <nav>
-            <a href="./home.php">Home</a>
-            <a href="./productos.php">Productos</a>
+            <a href="./home.php">Home</a> - 
+            <a href="./productos.php">Productos</a> - 
             <a href="./contacto.php">Contacto</a>
         </nav>
         
