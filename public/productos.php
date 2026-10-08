@@ -21,11 +21,12 @@ if (isset($_GET['categoria'])) {
 <body>
     <?php include_once '../app/includes/header_public.php'; ?>
     <main>
-        <<!-- Sección de menú lateral, LOS FILTROS NO FUNCIONAN ESTAN DE DECORACION -->
+        <!-- Sección de menú lateral, los filtros no funcionan ya que no se pide envío real de formularios
+        Los filtros actualizan la url, pero no filtran los productos que se muestran -->
         <section class="menu">
             <h3>Categorias</h3>
             <ul>
-                <?php foreach ($categorias as $catPrincipal => $subcategorias){
+                <?php foreach ($listaCategorias as $catPrincipal => $subcategorias){
                     echo "<li>";
                     echo "<a href='?categoria=" . urlencode($catPrincipal) . "'><strong>$catPrincipal</strong></a>";
                     echo "<ul>";
@@ -59,17 +60,18 @@ if (isset($_GET['categoria'])) {
                  } ?>
             <ul>
                 <?php foreach ($listaMarcas as $marca) { 
-                    $checked = '';
-                    if (isset($_GET['marcas']) && in_array($marca, $_GET['marcas'])) {
-                        $checked = 'checked';
+                    if ($marca['activo']) {
+                    $verificado = '';
+                    if (isset($_GET['marcas']) && in_array($marca['id'], $_GET['marcas'])) {
+                        $verificado = 'verificado';
                     }
                     echo "<li>";
-                    echo "<input type='checkbox' name='marcas[]' value='" . $marca . "' $checked> $marca";
+                // Usamos $marca['id'] para el valor enviado y $marca['nombre'] para mostrar al usuario
+                    echo "<input type='checkbox' name='marcas[]' value='" . $marca['id'] . "' $verificado> " . htmlspecialchars($marca['nombre']);
                     echo "</li>";
-                 } ?>
+                    }
+                } ?>
             </ul>
-
-
 
             <button type="submit">Aplicar Filtros</button>
             <?php if (isset($_GET['marcas'])){
@@ -80,11 +82,11 @@ if (isset($_GET['categoria'])) {
             </form>
         </section>
 
-        <<!-- Sección de productos -->
+        <!-- Sección de productos -->
         <section class="productos">
             <h2><?php echo $tituloSeccion; ?></h2>
 
-            <?php foreach ($productos as $producto) { 
+            <?php foreach ($listaProductos as $producto) { 
                 echo "<article>";
                 echo "<a href=\"./detalle_producto.php?id=" . $producto['id'] . "\">";
                 echo "<img src=\"" . $producto['imagen'] . "\" alt=\"" . $producto['nombre'] . "\">";
