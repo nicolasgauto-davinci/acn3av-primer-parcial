@@ -3,15 +3,35 @@ declare(strict_types=1);
 
 //Marcas
 $listaMarcas = array(
-    "Lancôme",
-    "Natura",
-    "Philips",
-    "Antonio Banderas",
-    "Mantra Beauty"
+    array(
+        "id" => 1,
+        "nombre" => "Lancôme",
+        "activo" => true
+    ),
+    array(
+        "id" => 2,
+        "nombre" => "Natura",
+        "activo" => true
+    ),
+    array(
+        "id" => 3,
+        "nombre" => "Philips",
+        "activo" => true
+    ),
+    array(
+        "id" => 4,
+        "nombre" => "Antonio Banderas",
+        "activo" => true
+    ),
+    array(
+        "id" => 5,
+        "nombre" => "Mantra Beauty",
+        "activo" => true
+    )
 );
 
 //Categorias
-$categorias = array(
+$listaCategorias = array(
     "Farmacia" => array("Venta Libre", "Recetados"),
     "Perfumería" => array("Fragancias Nacionales", "Fragancias Importadas"),
     "Cuidado Personal" => array("Capilar", "Skin Care")
@@ -23,47 +43,76 @@ $listaComentarios = array(
         array(
             "email" => "email1@example.com",
             "comentario" => "Me encanta este perfume, tiene un aroma muy agradable.",
-            "valoracion" => 5
+            "valoracion" => 5,
+            "fecha" => "2/10/2026",
+            "activo" => true,
+            "aprobado" => true
         ),
         array(
             "email" => "email2@example.com",
             "comentario" => "Es un perfume muy refrescante y duradero.",
-            "valoracion" => 4
+            "valoracion" => 4,
+            "fecha" => "2/10/2026",
+            "activo" => false,
+            "aprobado" => true
         )
     ),
     2 => array(
         array(
             "email" => "email3@example.com",
             "comentario" => "Excelente calidad y aroma.",
-            "valoracion" => 5
+            "valoracion" => 5,
+            "fecha" => "2/10/2026",
+            "activo" => true,
+            "aprobado" => true
         )
     ),
     3 => array(
         array(
             "email" => "email4@example.com",
             "comentario" => "Muy satisfactorio, recomiendo.",
-            "valoracion" => 4
+            "valoracion" => 4,
+            "fecha" => "2/10/2026",
+            "activo" => true,
+            "aprobado" => true
         )
     ),
     4 => array(
         array(
             "email" => "email5@example.com",
             "comentario" => "Un perfume increíble con un aroma duradero.",
-            "valoracion" => 5
+            "valoracion" => 5,
+            "fecha" => "2/10/2026",
+            "activo" => true,
+            "aprobado" => true
         )
     ),
     5 => array(
         array(
             "email" => "email6@example.com",
             "comentario" => "Perfecto para ocasiones especiales.",
-            "valoracion" => 5
+            "valoracion" => 5,
+            "fecha" => "2/10/2026",
+            "activo" => true,
+            "aprobado" => true
         )
     ),
     6 => array(
         array(
             "email" => "email7@example.com",
             "comentario" => "Un perfume maravilloso con un aroma intenso.",
-            "valoracion" => 5
+            "valoracion" => 5,
+            "fecha" => "2/10/2026",
+            "activo" => true,
+            "aprobado" => true
+        ),
+        array(
+            "email" => "email8@example.com",
+            "comentario" => "Un perfume horrible con un aroma a bazofia.",
+            "valoracion" => 1,
+            "fecha" => "2/10/2026",
+            "activo" => false,
+            "aprobado" => false
         )
     )
 );
@@ -84,13 +133,14 @@ function calcularRanking($comentariosProducto){
 }
 
 //Productos
-$productos = array(
+$listaProductos = array(
     array(
         "id" => 1,
         "nombre" => "Perfume Idôle Edp 100 Ml Lancôme",
-        "marca" => $listaMarcas[0], // "Lancôme"
+        "marca" => $listaMarcas[0]['nombre'], // "Lancôme"
         "precio" => 19999,
         "imagen" => "./assets/img/producto1.jpg",
+        "imagenAdmin" => "../assets/img/producto1.jpg",
         "ranking" => calcularRanking($listaComentarios[1]), // Calcula el ranking basado en los comentarios del producto 1
         "destacado" => true,
         "descripcion" => "Perfume Idôle Edp 100 Ml Lancôme",
@@ -99,15 +149,16 @@ $productos = array(
         "activo" => true,
         "categorias" => array(
             "madre" => "Perfumería",
-            "hija" => $categorias["Perfumería"][1] // "Fragancias Importadas"
+            "hija" => $listaCategorias["Perfumería"][1] // "Fragancias Importadas"
         )
     ),
     array(
         "id" => 2,
         "nombre" => "Perfume Natura Aura Alba",
-        "marca" => $listaMarcas[1], // "Natura"
+        "marca" => $listaMarcas[1]['nombre'], // "Natura"
         "precio" => 19999,
         "imagen" => "./assets/img/producto2.jpg",
+        "imagenAdmin" => "../assets/img/producto2.jpg",
         "ranking" => calcularRanking($listaComentarios[2]), // Calcula el ranking basado en los comentarios del producto 2
         "destacado" => true,
         "descripcion" => "Perfume Natura Aura Alba",
@@ -116,15 +167,16 @@ $productos = array(
         "activo" => true,
         "categorias" => array(
             "madre" => "Perfumería",
-            "hija" => $categorias["Perfumería"][1] // "Fragancias Importadas"
+            "hija" => $listaCategorias["Perfumería"][1] // "Fragancias Importadas"
         )
     ),
     array(
         "id" => 3,
         "nombre" => "Depiladora Ipl Philips Lumea Prestige Bri947",
-        "marca" => $listaMarcas[2], // "Philips"
+        "marca" => $listaMarcas[2]['nombre'], // "Philips"
         "precio" => 19999,
         "imagen" => "./assets/img/producto3.jpg",
+        "imagenAdmin" => "../assets/img/producto3.jpg",
         "ranking" => calcularRanking($listaComentarios[3]), // Calcula el ranking basado en los comentarios del producto 3
         "destacado" => true,
         "descripcion" => "Depiladora Ipl Philips Lumea Prestige Bri947",
@@ -133,15 +185,16 @@ $productos = array(
         "activo" => true,
         "categorias" => array(
             "madre" => "Cuidado Personal",
-            "hija" => $categorias["Cuidado Personal"][0] // "Capilar"
+            "hija" => $listaCategorias["Cuidado Personal"][0] // "Capilar"
         )
     ),
     array(
         "id" => 4,
         "nombre" => "Perfume Her Secret Pink Absolu Eau De Parfum Antonio Banderas 80ml",
-        "marca" => $listaMarcas[3], // "Antonio Banderas"
+        "marca" => $listaMarcas[3]['nombre'], // "Antonio Banderas"
         "precio" => 19999,
         "imagen" => "./assets/img/producto4.jpg",
+        "imagenAdmin" => "../assets/img/producto4.jpg",
         "ranking" => calcularRanking($listaComentarios[4]), // Calcula el ranking basado en los comentarios del producto 4
         "destacado" => true,
         "descripcion" => "Perfume Her Secret Pink Absolu Eau De Parfum Antonio Banderas 80ml",
@@ -150,15 +203,16 @@ $productos = array(
         "activo" => true,
         "categorias" => array(
             "madre" => "Perfumería",
-            "hija" => $categorias["Perfumería"][0] // "Fragancias Nacionales"
+            "hija" => $listaCategorias["Perfumería"][0] // "Fragancias Nacionales"
         )
     ),
     array(
         "id" => 5,
         "nombre" => "Modelador Multifunción Mantra Air Nova Nude",
-        "marca" => $listaMarcas[4], // "Mantra Beauty"
+        "marca" => $listaMarcas[4]['nombre'], // "Mantra Beauty"
         "precio" => 19999,
         "imagen" => "./assets/img/producto5.jpg",
+        "imagenAdmin" => "../assets/img/producto5.jpg",
         "ranking" => calcularRanking($listaComentarios[5]), // Calcula el ranking basado en los comentarios del producto 5
         "destacado" => true,
         "descripcion" => "Modelador Multifunción Mantra Air Nova Nude",
@@ -167,15 +221,16 @@ $productos = array(
         "activo" => true,
         "categorias" => array(
             "madre" => "Cuidado Personal",
-            "hija" => $categorias["Cuidado Personal"][0] // "Capilar"
+            "hija" => $listaCategorias["Cuidado Personal"][0] // "Capilar"
         )
     ),
     array(
         "id" => 6,
         "nombre" => "Set Renergie Triple Serum Lancôme 50 Ml",
-        "marca" => $listaMarcas[0], // "Lancôme"
+        "marca" => $listaMarcas[0]['nombre'], // "Lancôme"
         "precio" => 19999,
         "imagen" => "./assets/img/producto6.jpg",
+        "imagenAdmin" => "../assets/img/producto6.jpg",
         "ranking" => calcularRanking($listaComentarios[6]), // Calcula el ranking basado en los comentarios del producto 6
         "destacado" => true,
         "descripcion" => "Set Renergie Triple Serum Lancôme 50 Ml",
@@ -184,7 +239,7 @@ $productos = array(
         "activo" => true,
         "categorias" => array(
             "madre" => "Cuidado Personal",
-            "hija" => $categorias["Cuidado Personal"][1] // "Skin Care"
+            "hija" => $listaCategorias["Cuidado Personal"][1] // "Skin Care"
         )
     )
 );
