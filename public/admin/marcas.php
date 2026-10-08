@@ -1,11 +1,5 @@
 <?php
 
-$listaMarcas = array(
-    "Lancôme",
-    "Natura",
-    "Philips",
-    "Antonio Banderas",
-    "Mantra Beauty"
-);
+require_once '../../app/includes/database.php';
 
 ?>
