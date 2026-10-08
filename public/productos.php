@@ -1,13 +1,8 @@
 <?php
-//Las categorias las tengo que guardar en un archivo en admin
-/*$categorias = array(
-    "Farmacia" => array("Venta Libre", "Recetados"),
-    "Perfumería" => array("Fragancias Nacionales", "Fragancias Importadas"),
-    "Cuidado Personal" => array("Capilar", "Skin Care")
-);*/
+declare(strict_types=1);
+session_start();
 
-include_once '../public/admin/categorias.php';
-include_once '../public/admin/marcas.php';
+require_once '../app/includes/database.php';
 
 $tituloSeccion = "Todos los productos";
 
@@ -26,6 +21,7 @@ if (isset($_GET['categoria'])) {
 <body>
     <?php include_once '../app/includes/header_public.php'; ?>
     <main>
+        <<!-- Sección de menú lateral, LOS FILTROS NO FUNCIONAN ESTAN DE DECORACION -->
         <section class="menu">
             <h3>Categorias</h3>
             <ul>
@@ -83,8 +79,24 @@ if (isset($_GET['categoria'])) {
             ?>
             </form>
         </section>
+
+        <<!-- Sección de productos -->
         <section class="productos">
             <h2><?php echo $tituloSeccion; ?></h2>
+
+            <?php foreach ($productos as $producto) { 
+                echo "<article>";
+                echo "<a href=\"./detalle_producto.php?id=" . $producto['id'] . "\">";
+                echo "<img src=\"" . $producto['imagen'] . "\" alt=\"" . $producto['nombre'] . "\">";
+                echo "<p class=\"nombreProducto\"><strong>" . $producto['nombre'] . "</strong></p>";
+                echo "<p class=\"marcaProducto\"><i>" . $producto['marca'] . "</i></p>";                    
+                echo "<p class=\"precioProducto\"><b>$ " . number_format($producto['precio'], 0, ',', '.') . "</b></p>";
+                if ($producto['ranking'] !== null) {
+                    echo "<p>★" . $producto['ranking'] . "</p>";
+                }
+                echo "</a>";
+                echo "</article>";
+            } ?>
         </section>
     </main>
 </body>
