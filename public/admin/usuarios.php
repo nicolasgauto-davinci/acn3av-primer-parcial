@@ -14,6 +14,6 @@ require_once '../../app/includes/database.php';
     <title>Document</title>
 </head>
 <body>
-    
+    <?php include_once '../../app/includes/header_admin.php'; ?>
 </body>
 </html>

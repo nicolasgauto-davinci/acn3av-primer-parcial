@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];
     $prod_encontrado = null;
 
-    foreach ($productos as $prod) {
+    foreach ($listaProductos as $prod) {
         if ($prod['id'] === $id) {
             $prod_encontrado = $prod;
             break;

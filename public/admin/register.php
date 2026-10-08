@@ -12,8 +12,8 @@ session_start();
 </head>
 <body>
     <main>
-        <h2 class="resaltado">Registrarse</h2>
-        <form class="resaltado" action="procesar_registro.php" method="POST">
+        <h2>Registrarse</h2>
+        <form action="procesar_registro.php" method="POST">
             <label>Nombre completo:</label>
             <input type="text" name="nombre_completo" required><br>
             <label>Mail:</label>
