@@ -1,5 +1,8 @@
 <?php
-include_once 'admin/productos.php';
+declare(strict_types=1);
+session_start();
+
+require_once '../app/includes/database.php';
 ?>
 
 <!DOCTYPE html>
