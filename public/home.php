@@ -17,7 +17,7 @@ require_once '../app/includes/database.php';
     <main>
         <h1>Productos Destacados</h1>
         <section class="productos-destacados">
-            <?php foreach ($productos as $producto) { 
+            <?php foreach ($listaProductos as $producto) { 
                  if ($producto['destacado'] == true) { 
                     echo "<article>";
                     echo "<a href=\"./detalle_producto.php?id=" . $producto['id'] . "\">";
