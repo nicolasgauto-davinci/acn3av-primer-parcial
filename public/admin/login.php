@@ -32,10 +32,9 @@ session_start();
 </html>
 
 <?php
-
-//Podria juntar todos los errores en un solo if en una funcion
+/*
 if(isset($_GET['error'])) {
     if($_GET['error'] === '2') {
         echo "<p style='color: red;'>Por favor, complete todos los campos.</p>";
     }
-}
+}*/
