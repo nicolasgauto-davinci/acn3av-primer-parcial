@@ -8,7 +8,7 @@
 </head>
 <body>
     <footer>
-        <img class="logoFooter" src="./assets/img/logo.jpg" alt="Logo">
+        <img class="logoFooter" src="../assets/img/logo.jpg" alt="Logo">
         <p>© City Farmac <?php echo date('Y'); ?> Todos los derechos reservados</p>
     </footer>
 </body>
