@@ -32,9 +32,57 @@ $listaMarcas = array(
 
 //Categorias
 $listaCategorias = array(
-    "Farmacia" => array("Venta Libre", "Recetados"),
-    "Perfumería" => array("Fragancias Nacionales", "Fragancias Importadas"),
-    "Cuidado Personal" => array("Capilar", "Skin Care")
+    array(
+        "id" => 1,
+        "activo" => true,
+        "nombre" => "Farmacia",
+        "subcategorias" => array(
+            array(
+                "id" => 2,
+                "nombre" => "Venta Libre",
+                "activo" => true
+            ),
+            array(
+                "id" => 3,
+                "nombre" => "Recetados",
+                "activo" => true
+            )
+        )
+    ),
+    array(
+        "id" => 4,
+        "activo" => true,
+        "nombre" => "Perfumería",
+        "subcategorias" => array(
+            array(
+                "id" => 5,
+                "nombre" => "Fragancias Nacionales",
+                "activo" => true
+            ),
+            array(
+                "id" => 6,
+                "nombre" => "Fragancias Importadas",
+                "activo" => true
+            )
+        )
+    ),
+    array(
+        "id" => 7,
+        "activo" => true,
+        "nombre" => "Cuidado Personal",
+        "subcategorias" => array(
+            array(
+                "id" => 8,
+                "nombre" => "Capilar",
+                "activo" => true
+            ),
+            array(
+                "id" => 9,
+                "nombre" => "Skin Care",
+                "activo" => true
+            )
+        )
+    )
 );
 
 //Comentarios
@@ -137,7 +185,7 @@ $listaProductos = array(
     array(
         "id" => 1,
         "nombre" => "Perfume Idôle Edp 100 Ml Lancôme",
-        "marca" => $listaMarcas[0]['nombre'], // "Lancôme"
+        "marca" => $listaMarcas[0]["nombre"], // "Lancôme"
         "precio" => 19999,
         "imagen" => "./assets/img/producto1.jpg",
         "imagenAdmin" => "../assets/img/producto1.jpg",
@@ -148,14 +196,14 @@ $listaProductos = array(
         "comentarios" => $listaComentarios[1], // Comentarios del producto 1
         "activo" => true,
         "categorias" => array(
-            "madre" => "Perfumería",
-            "hija" => $listaCategorias["Perfumería"][1] // "Fragancias Importadas"
+            "padre" => $listaCategorias[1]["nombre"], // "Perfumeria"
+            "hija" => $listaCategorias[1]["subcategorias"][1]["nombre"] // "Fragancias Importadas"
         )
     ),
     array(
         "id" => 2,
         "nombre" => "Perfume Natura Aura Alba",
-        "marca" => $listaMarcas[1]['nombre'], // "Natura"
+        "marca" => $listaMarcas[1]["nombre"], // "Natura"
         "precio" => 19999,
         "imagen" => "./assets/img/producto2.jpg",
         "imagenAdmin" => "../assets/img/producto2.jpg",
@@ -166,14 +214,14 @@ $listaProductos = array(
         "comentarios" => $listaComentarios[2], // Comentarios del producto 2
         "activo" => true,
         "categorias" => array(
-            "madre" => "Perfumería",
-            "hija" => $listaCategorias["Perfumería"][1] // "Fragancias Importadas"
+            "padre" => $listaCategorias[1]["nombre"], // "Perfumeria"
+            "hija" => $listaCategorias[1]["subcategorias"][1]["nombre"] // "Fragancias Importadas"
         )
     ),
     array(
         "id" => 3,
         "nombre" => "Depiladora Ipl Philips Lumea Prestige Bri947",
-        "marca" => $listaMarcas[2]['nombre'], // "Philips"
+        "marca" => $listaMarcas[2]["nombre"], // "Philips"
         "precio" => 19999,
         "imagen" => "./assets/img/producto3.jpg",
         "imagenAdmin" => "../assets/img/producto3.jpg",
@@ -184,14 +232,14 @@ $listaProductos = array(
         "comentarios" => $listaComentarios[3], // Comentarios del producto 3
         "activo" => true,
         "categorias" => array(
-            "madre" => "Cuidado Personal",
-            "hija" => $listaCategorias["Cuidado Personal"][0] // "Capilar"
+            "padre" => $listaCategorias[2]["nombre"], // "Cuidado personal"
+            "hija" => $listaCategorias[2]["subcategorias"][0]["nombre"] // "Capilar"
         )
     ),
     array(
         "id" => 4,
         "nombre" => "Perfume Her Secret Pink Absolu Eau De Parfum Antonio Banderas 80ml",
-        "marca" => $listaMarcas[3]['nombre'], // "Antonio Banderas"
+        "marca" => $listaMarcas[3]["nombre"], // "Antonio Banderas"
         "precio" => 19999,
         "imagen" => "./assets/img/producto4.jpg",
         "imagenAdmin" => "../assets/img/producto4.jpg",
@@ -202,14 +250,14 @@ $listaProductos = array(
         "comentarios" => $listaComentarios[4], // Comentarios del producto 4
         "activo" => true,
         "categorias" => array(
-            "madre" => "Perfumería",
-            "hija" => $listaCategorias["Perfumería"][0] // "Fragancias Nacionales"
+            "padre" => $listaCategorias[1]["nombre"], // "Perfumeria"
+            "hija" => $listaCategorias[1]["subcategorias"][0]["nombre"] // "Fragancias Nacionales"
         )
     ),
     array(
         "id" => 5,
         "nombre" => "Modelador Multifunción Mantra Air Nova Nude",
-        "marca" => $listaMarcas[4]['nombre'], // "Mantra Beauty"
+        "marca" => $listaMarcas[4]["nombre"], // "Mantra Beauty"
         "precio" => 19999,
         "imagen" => "./assets/img/producto5.jpg",
         "imagenAdmin" => "../assets/img/producto5.jpg",
@@ -220,14 +268,14 @@ $listaProductos = array(
         "comentarios" => $listaComentarios[5], // Comentarios del producto 5
         "activo" => true,
         "categorias" => array(
-            "madre" => "Cuidado Personal",
-            "hija" => $listaCategorias["Cuidado Personal"][0] // "Capilar"
+            "padre" => $listaCategorias[2]["nombre"], // "Cuidado Personal"
+            "hija" => $listaCategorias[2]["subcategorias"][0]["nombre"] // "Capilar"
         )
     ),
     array(
         "id" => 6,
         "nombre" => "Set Renergie Triple Serum Lancôme 50 Ml",
-        "marca" => $listaMarcas[0]['nombre'], // "Lancôme"
+        "marca" => $listaMarcas[0]["nombre"], // "Lancôme"
         "precio" => 19999,
         "imagen" => "./assets/img/producto6.jpg",
         "imagenAdmin" => "../assets/img/producto6.jpg",
@@ -238,8 +286,8 @@ $listaProductos = array(
         "comentarios" => $listaComentarios[6], // Comentarios del producto 6
         "activo" => true,
         "categorias" => array(
-            "madre" => "Cuidado Personal",
-            "hija" => $listaCategorias["Cuidado Personal"][1] // "Skin Care"
+            "padre" => $listaCategorias[2]["nombre"], // "Cuidado Personal"
+            "hija" => $listaCategorias[2]["subcategorias"][1]["nombre"] // "Skin Care"
         )
     )
 );
@@ -253,7 +301,8 @@ $listaUsuarios = array(
         "clave" => "admin123",
         "permisos" => array(
             "superadmin"),
-        "activo" => true
+        "activo" => true,
+        "perfil" => "admin"
     ),
     array(
         "id" => 2,
@@ -262,7 +311,8 @@ $listaUsuarios = array(
         "clave" => "usuario123",
         "permisos" => array(
             "admin", "marcas", "categorias", "cliente"),
-        "activo" => true
+        "activo" => true,
+        "perfil" => "marialo"
     ),
     array(
         "id" => 3,
@@ -271,7 +321,8 @@ $listaUsuarios = array(
         "clave" => "usuario123",
         "permisos" => array(
             "admin", "perfiles", "usuarios", "cliente"),
-        "activo" => true
+        "activo" => true,
+        "perfil" => "carlosga"
     ),
     array(
         "id" => 4,
@@ -280,6 +331,7 @@ $listaUsuarios = array(
         "clave" => "usuario123",
         "permisos" => array(
             "cliente"),
-        "activo" => true
+        "activo" => true,
+        "perfil" => "laurafe"
     )
 );
