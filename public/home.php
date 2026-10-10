@@ -16,7 +16,7 @@ require_once '../app/includes/database.php';
     <?php include_once '../app/includes/header_public.php'; ?>
     <main>
         <h1>Productos Destacados</h1>
-        <section class="productos-destacados">
+        <section class="productosDestacados">
             <?php foreach ($listaProductos as $producto) { 
                  if ($producto['destacado'] == true) { 
                     echo "<article>";
@@ -34,5 +34,6 @@ require_once '../app/includes/database.php';
             } ?>
         </section>
     </main>
+    <?php include_once '../app/includes/footer_public.php'; ?>
 </body>
 </html>

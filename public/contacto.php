@@ -17,34 +17,25 @@ session_start();
             <h2>Contacto</h2>
             <p>¿Tienes alguna pregunta? ¡Estamos aquí para ayudarte!</p>
             <form action="procesar_contacto.php" method="POST">
-                <div>
-                    <label for="nombre">Nombre completo:</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre y apellido" required>
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="ejemplo@gmail.com" required>
-                </div>
-                <div>
-                    <label for="telefono">Numero de teléfono:</label>
-                    <input type="number" id="telefono" name="telefono" placeholder="Ej: 1123456789" required>
-                </div>
-                <div>
-                    <label for="area">Área:</label>
-                    <select name="area" required>
-                        <option value="">Selecciona un área</option>
-                        <option value="ventas">Farmacia</option>
-                        <option value="soporte">Belleza</option>
-                        <option value="compras">Compras</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="mensaje">Mensaje:</label>
-                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
-                </div>
-                <input type="submit" value="Enviar">
+                <label for="nombre">Nombre completo:</label><br>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre y apellido" required><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" placeholder="ejemplo@gmail.com" required><br>
+                <label for="telefono">Numero de teléfono:</label><br>
+                <input type="number" id="telefono" name="telefono" placeholder="Ej: 1123456789" required><br>
+                <label for="area">Área:</label><br>
+                <select name="area" required>
+                    <option value="">Selecciona un área</option>
+                    <option value="ventas">Farmacia</option>
+                    <option value="soporte">Belleza</option>
+                    <option value="compras">Compras</option>
+                </select><br>
+                <label for="mensaje">Mensaje:</label><br>
+                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea><br>
+                <button type="submit" class="procesar">Enviar</button>
             </form>
         </section>
     </main>
+    <?php include_once '../app/includes/footer_public.php'; ?>
 </body>
 </html>

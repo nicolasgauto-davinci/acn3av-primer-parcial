@@ -6,8 +6,40 @@ require_once '../app/includes/database.php';
 
 $tituloSeccion = "Todos los productos";
 
-if (isset($_GET['categoria'])) {
-    $tituloSeccion = htmlspecialchars($_GET['categoria']);
+$prodsFiltrados = $listaProductos;
+
+//Filtro categorias
+if (isset($_GET['categoria']) && $_GET['categoria'] !== ''){
+    $catSelec = $_GET['categoria'];
+    $tituloSeccion = htmlspecialchars($catSelec);
+
+    $tempProds = [];
+    foreach ($prodsFiltrados as $producto){
+        if ($producto['categorias']['padre'] === $catSelec || $producto['categorias']['hija'] === $catSelec){
+            $tempProds[] = $producto;
+        }
+    }
+    $prodsFiltrados = $tempProds;
+}
+
+//Filtro marcas
+if (isset($_GET['marcas']) && is_array($_GET['marcas'])) {
+    $marcasSelecIds = $_GET['marcas'];
+    
+    $tempProds = [];
+    foreach ($prodsFiltrados as $producto) {
+        $idMarcaProducto = null;
+        foreach ($listaMarcas as $marcaInfo) {
+            if ($marcaInfo['nombre'] === $producto['marca']) {
+                $idMarcaProducto = (string) $marcaInfo['id'];
+                break;
+            }
+        }
+        if ($idMarcaProducto !== null && in_array($idMarcaProducto, $marcasSelecIds)) {
+            $tempProds[] = $producto;
+        }
+    }
+    $prodsFiltrados = $tempProds;
 }
 ?>
 
@@ -20,18 +52,16 @@ if (isset($_GET['categoria'])) {
 </head>
 <body>
     <?php include_once '../app/includes/header_public.php'; ?>
-    <main>
-        <!-- Sección de menú lateral, los filtros no funcionan ya que no se pide envío real de formularios
-        Los filtros actualizan la url, pero no filtran los productos que se muestran -->
-        <section class="menu">
+    <main class="layout-productos">
+        <section class="menu-filtros">
             <h3>Categorias</h3>
             <ul>
-                <?php foreach ($listaCategorias as $catPrincipal => $subcategorias){
+                <?php foreach ($listaCategorias as $catPadre){
                     echo "<li>";
-                    echo "<a href='?categoria=" . urlencode($catPrincipal) . "'><strong>$catPrincipal</strong></a>";
+                    echo "<a href='?categoria=" . urlencode($catPadre['nombre']) . "'><strong>" . htmlspecialchars($catPadre['nombre']) . "</strong></a>";
                     echo "<ul>";
-                    foreach ($subcategorias as $sub) {
-                        echo "<li><a href='?categoria=" . urlencode($sub) . "'>$sub</a></li>";
+                    foreach ($catPadre['subcategorias'] as $subcat){
+                        echo "<li><a href='?categoria=" . urlencode($subcat['nombre']) . "'>" . htmlspecialchars($subcat['nombre']) . "</a></li>";
                     }
                     echo "</ul>";
                     echo "</li>";
@@ -66,7 +96,6 @@ if (isset($_GET['categoria'])) {
                         $verificado = 'verificado';
                     }
                     echo "<li>";
-                // Usamos $marca['id'] para el valor enviado y $marca['nombre'] para mostrar al usuario
                     echo "<input type='checkbox' name='marcas[]' value='" . $marca['id'] . "' $verificado> " . htmlspecialchars($marca['nombre']);
                     echo "</li>";
                     }
@@ -82,24 +111,30 @@ if (isset($_GET['categoria'])) {
             </form>
         </section>
 
-        <!-- Sección de productos -->
-        <section class="productos">
-            <h2><?php echo $tituloSeccion; ?></h2>
-
-            <?php foreach ($listaProductos as $producto) { 
-                echo "<article>";
-                echo "<a href=\"./detalle_producto.php?id=" . $producto['id'] . "\">";
-                echo "<img src=\"" . $producto['imagen'] . "\" alt=\"" . $producto['nombre'] . "\">";
-                echo "<p class=\"nombreProducto\"><strong>" . $producto['nombre'] . "</strong></p>";
-                echo "<p class=\"marcaProducto\"><i>" . $producto['marca'] . "</i></p>";                    
-                echo "<p class=\"precioProducto\"><b>$ " . number_format($producto['precio'], 0, ',', '.') . "</b></p>";
-                if ($producto['ranking'] !== null) {
-                    echo "<p>★" . $producto['ranking'] . "</p>";
+        <!-- Contenedor de productos -->
+        <section class="contenedor-productos">
+            <?php
+            echo "<h2>$tituloSeccion</h2>";
+            if(empty($prodsFiltrados)){
+                echo "<p>No se encontrar productos que coincidan con los filtros seleccionados</p>";
+            } else{
+                foreach ($prodsFiltrados as $producto) { 
+                    echo "<article>";
+                    echo "<a href=\"./detalle_producto.php?id=" . $producto['id'] . "\">";
+                    echo "<img src=\"" . $producto['imagen'] . "\" alt=\"" . $producto['nombre'] . "\">";
+                    echo "<p class=\"nombreProducto\"><strong>" . $producto['nombre'] . "</strong></p>";
+                    echo "<p class=\"marcaProducto\"><i>" . $producto['marca'] . "</i></p>";                    
+                    echo "<p class=\"precioProducto\"><b>$ " . number_format($producto['precio'], 0, ',', '.') . "</b></p>";
+                    if ($producto['ranking'] !== null) {
+                        echo "<p>★" . $producto['ranking'] . "</p>";
+                    }
+                    echo "</a>";
+                    echo "</article>";
                 }
-                echo "</a>";
-                echo "</article>";
-            } ?>
+            }
+             ?>
         </section>
     </main>
+    <?php include_once '../app/includes/footer_public.php'; ?>
 </body>
 </html>

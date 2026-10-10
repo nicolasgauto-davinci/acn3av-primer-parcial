@@ -27,18 +27,32 @@ if (isset($_GET['id'])) {
 </head>
 <body>
     <?php include_once '../app/includes/header_public.php'; ?>
-    <main>
-        <section class="detalle-producto">
-            <h2><?php echo htmlspecialchars($prod_encontrado['nombre']); ?></h2>
-            <img src="<?php echo htmlspecialchars($prod_encontrado['imagen']); ?>" alt="<?php echo htmlspecialchars($prod_encontrado['nombre']); ?>">
-            <p><strong>Marca:</strong> <?php echo htmlspecialchars($prod_encontrado['marca']); ?></p>
-            <p><strong>Modelo:</strong> <?php echo htmlspecialchars($prod_encontrado['modelo']); ?></p>
-            <p><strong>Descripción:</strong> <?php echo htmlspecialchars($prod_encontrado['descripcion']); ?></p>                
-            <p><strong>Precio:</strong> $ <?php echo number_format($prod_encontrado['precio'], 0, ',', '.'); ?></p>    
-            <?php if ($prod_encontrado['ranking'] !== null) { ?>
-            <p><strong>Ranking:</strong> Top <?php echo $prod_encontrado['ranking']; ?></p>
-            <?php } ?>
-            <div class="comentarios">
+    <main class="layout-detalle">
+        <section class="producto-superior">
+            <div class="producto-imagen">
+                <?php echo "<img src='" . htmlspecialchars($prod_encontrado['imagen']) . "' alt=" . htmlspecialchars($prod_encontrado['nombre']) . ">"; ?>
+            </div>
+            <div class="producto-info">
+                <?php 
+                echo "<h2>" . htmlspecialchars($prod_encontrado['nombre']) . "</h2>"; 
+                echo "<p class='precio-destacado'>$" . number_format($prod_encontrado['precio'], 0, ',', '.') . "</p>";
+                if ($prod_encontrado['ranking'] !== null){
+                    echo "<p class=ranking>★ " . $prod_encontrado['ranking'] . "</p>";
+                }
+                ?>
+                <div class="caracteristicas">
+                <?php 
+                echo "<p>Marca: " . htmlspecialchars($prod_encontrado['marca']) . "</p>";
+                echo "<p>Modelo: " . htmlspecialchars($prod_encontrado['modelo']) . "</p>";
+                ?>
+                </div>
+                <div class="descripcion-box">
+                    <?php echo htmlspecialchars($prod_encontrado['descripcion']) ?>
+                </div>
+            </div>
+        </section>
+        <section class="producto-inferior">
+            <div class="lista-comentarios">
                 <h3>Comentarios de Usuarios</h3>
                 <?php 
                 if (empty($prod_encontrado['comentarios'])) {
@@ -56,35 +70,33 @@ if (isset($_GET['id'])) {
                 }
                 ?>
                 </div>
+            <div class="formulario-comentario">
+                <h3>Dejar un comentario</h3>
+                <form action="procesar_comentario.php?id=<?php echo $id; ?>" method="POST">
+                    <div>
+                        <label for="email_comentario">Email:</label><br>
+                        <input type="email" id="email_comentario" name="email_comentario" required placeholder="tuemail@ejemplo.com">
+                    </div>
+                    <div>
+                        <label for="texto_comentario">Comentario:</label><br>
+                        <textarea id="texto_comentario" name="texto_comentario" rows="4" cols="50" required placeholder="Escribe tu opinión sobre el producto..."></textarea>
+                    </div>
+                    <div>
+                        <label for="valoracion">Valoración (1 a 5):</label><br>
+                        <select id="valoracion" name="valoracion" required>
+                            <option value="">Selecciona una puntuación</option>
+                            <option value="1">1 - Muy Malo</option>
+                            <option value="2">2 - Malo</option>
+                            <option value="3">3 - Regular</option>
+                            <option value="4">4 - Bueno</option>
+                            <option value="5">5 - Excelente</option>
+                        </select>
+                    </div>
+                    <button type="submit">Enviar comentario</button>
+                </form>
+            </div>
         </section>
-
-        <div>
-            <h3>Dejar un comentario</h3>
-            <form action="procesar_comentario.php?id=<?php echo $id; ?>" method="POST">
-        
-                <div>
-                    <label for="email_comentario">Email:</label><br>
-                    <input type="email" id="email_comentario" name="email_comentario" required placeholder="tuemail@ejemplo.com">
-                </div>
-
-                <div>
-                    <label for="texto_comentario">Comentario:</label><br>
-                    <textarea id="texto_comentario" name="texto_comentario" rows="4" cols="50" required placeholder="Escribe tu opinión sobre el producto..."></textarea>
-                </div>
-                <div>
-                    <label for="valoracion">Valoración (1 a 5):</label><br>
-                    <select id="valoracion" name="valoracion" required>
-                        <option value="">Selecciona una puntuación</option>
-                        <option value="1">1 - Muy Malo</option>
-                        <option value="2">2 - Malo</option>
-                        <option value="3">3 - Regular</option>
-                        <option value="4">4 - Bueno</option>
-                        <option value="5">5 - Excelente</option>
-                    </select>
-                </div>
-                <button type="submit">Enviar comentario</button>
-            </form>
-        </div>
     </main>
+    <?php include_once '../app/includes/footer_public.php'; ?>
 </body>
 </html>
