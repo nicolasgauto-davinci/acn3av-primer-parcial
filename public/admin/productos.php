@@ -3,6 +3,14 @@ declare(strict_types=1);
 session_start();
 
 require_once '../../app/includes/database.php';
+
+$catPadreSel = null;
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['categoriaPadre'])){
+    if($_POST['categoriaPadre'] !== null){
+        $catPadreSel = (int) $_POST['categoriaPadre'];
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +25,8 @@ require_once '../../app/includes/database.php';
     <?php include_once '../../app/includes/header_admin.php'; ?>
     <main>
         <h1>Gestión de Productos</h1>
-        <table class="tablaProductos">
+        <section>
+            <table class="tablaProductos">
             <thead>
                 <tr>
                     <th>IMG</th>
@@ -41,59 +50,78 @@ require_once '../../app/includes/database.php';
                 ?>
             </tbody>
         </table>
+        </section>
+
         <h1>Creación de Productos</h1>
-        <form action="editar_producto.php" method="post" enctype="multipart/form-data">
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" required>
-            <br>
-            <label for="descripcion">Descripción:</label>
-            <textarea name="descripcion" required></textarea>
-            <br>
-            <label for="precio">Precio:</label>
-            <input type="number" name="precio" required>
-            <br>
-            <label for="categoriaMadre">Categoría madre:</label>
-            <select name="categoriaMadre" required>
-                <option>Seleccionar categoría madre</option>
-                <?php foreach ($listaCategorias as $categoriaMadre => $categoriasHijas) {
-                    echo "<option>" . htmlspecialchars($categoriaMadre) . "</option>";
+        <section>
+            <form action="editar_producto.php" method="post" enctype="multipart/form-data">
+            <label for="categoriaPadre">Categoría padre:</label><br>
+            <select name="categoriaPadre" required>
+                <option>Seleccionar categoría padre</option>
+                <?php 
+                foreach ($listaCategorias as $categoriaPadre) {
+                    $selected = ($catPadreSel === $categoriaPadre['id']) ? 'selected' : '';
+                    echo "<option value='" . $categoriaPadre['id'] . "' $selected>" . htmlspecialchars($categoriaPadre['nombre']) . "</option>";
                 } ?>
             </select>
+            <button type="submit" formaction="productos.php" formmethod="POST" formnovalidate>
+                Cargar subcategorías
+            </button>
             <br>
-
-<!-- no pude hacer que seleccione una categoria madre, y que en consecuencia muestre solo
- las categorias hijas que le corresponden
-
-            <label for="categoriaHija">Categoría hija:</label>
-            <select name="categoriaHija" required>
-                <option>Seleccionar categoria hija</option>
-                <?php /* foreach($listaCategorias as $categoriaMadre => $categoriasHijas){
-                    echo "<option>" . htmlspecialchars($categoriasHijas) . "</option>";
-                } */?>    
-            </select>
+            <label for="categoraHija">Categoria hija:</label><br>
+            <?php
+                if ($catPadreSel === null){
+                    echo "<select name='categoriaHija' required disabled>";
+                    echo "<option>Seleccionar categoria padre primero</option>";
+                    echo "</select>";
+                } else {
+                    echo "<select name='categoriaHija' required>";
+                    echo "<option>Seleccionar categoria hija</option>";
+                    foreach ($listaCategorias as $categoriaPadre){
+                        if ($categoriaPadre['id'] === $catPadreSel && $categoriaPadre['subcategorias'] !== null){
+                            foreach ($categoriaPadre['subcategorias'] as $subcat){
+                                $subSelected = (isset($_POST['categoriaHija']) && (int)$_POST['categoriaHija'] === $subcat['id']) ? 'selected' : '';
+                                echo "<option $subSelected>" . htmlspecialchars($subcat['nombre']) . "</option>";
+                            }
+                            break;
+                        }
+                    }
+                    echo "</select>";
+                }
+            ?>
             <br>
--->
-            <label for="marca">Marca:</label>
+            <label for="marca">Marca:</label><br>
             <select name="marca" required>
                 <option>Seleccionar marca</option>
                 <?php
                 foreach ($listaMarcas as $marca) {
-                    echo "<option value='" . $marca . "'>" . $marca . "</option>";
+                    echo "<option>" . htmlspecialchars($marca['nombre']) . "</option>";
                 }
                 ?>
             </select>
             <br>
-            <label for="modelo">Modelo:</label>
+            <label for="nombre">Nombre:</label><br>
+            <input type="text" name="nombre" required>
+            <br>
+            <label for="descripcion">Descripción:</label><br>
+            <textarea name="descripcion" required></textarea>
+            <br>
+            <label for="modelo">Modelo:</label><br>
             <input type="text" name="modelo" required>
             <br>
-            <label for="imagen">Imagen:</label>
+            <label for="precio">Precio:</label><br>
+            <input type="number" name="precio" required>
+            <br>
+            <label for="imagen">Imagen:</label><br>
             <input type="file" name="imagen" accept="image/*" required>
             <br>
-            <label for="destacado">Destacado:</label>
+            <label for="destacado">Destacado:</label><br>
             <input type="checkbox" name="destacado">
             <br>
-            <button type="submit">Crear producto</button>
+            <button type="submit" class="procesar">Crear producto</button>
         </form>
+        </section>
     </main>
+    <?php include_once '../../app/includes/footer_admin.php'; ?>
 </body>
 </html>

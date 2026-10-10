@@ -17,10 +17,11 @@ require_once '../../app/includes/database.php';
     <?php include_once '../../app/includes/header_admin.php'; ?>
     <main>
         <h1>Gestión de Perfiles</h1>
-        <table>
+        <section>
+            <table>
             <thead>
                 <tr>
-                    <th>Email</th>
+                    <th>Nombre de perfil</th>
                     <th>Permisos</th>
                     <th>🖉</th>
                     <th>Activo</th>
@@ -31,33 +32,37 @@ require_once '../../app/includes/database.php';
                 foreach ($listaUsuarios as $usuario) {
                     if (in_array('admin', $usuario['permisos']) || in_array('superadmin', $usuario['permisos'])) {
                         echo "<tr>";
-                        echo "<td>" . $usuario["email"] . "</td>";
+                        echo "<td>" . $usuario["perfil"] . "</td>";
                         echo "<td>" . implode(", ", $usuario["permisos"]) . "</td>";
                         echo "<td><a href='editar_perfil.php?id=" . $usuario["id"] . "'>🖉</a></td>";
                         echo "<td><input type='checkbox' " . ($usuario["activo"] ? "checked" : "") . " disabled></td>";
-                        echo "</tr>"; // Saltar usuarios con permisos de admin o superadmin
+                        echo "</tr>";
                     }
                 }
                 ?>
             </tbody>
         </table>
+        </section>
         <h1>Creación de Perfiles</h1>
-        <form action="editar_perfil.php" method="POST">
-            <label for="email">Email:</label>
+        <section>
+            <form action="editar_perfil.php" method="POST">
+            <label for="email">Email:</label><br>
             <input type="email" name="email" required>
             <fieldset>
                 <legend>Permisos</legend>
-                <label><input type="checkbox" name="permisos[]" value="superadmin"> superadmin</label><br>
-                <label><input type="checkbox" name="permisos[]" value="admin"> admin</label><br>
-                <label><input type="checkbox" name="permisos[]" value="categorias"> categorias</label><br>
-                <label><input type="checkbox" name="permisos[]" value="marcas"> marcas</label><br>
-                <label><input type="checkbox" name="permisos[]" value="comentarios"> comentarios</label><br>
-                <label><input type="checkbox" name="permisos[]" value="productos"> productos</label><br>
-                <label><input type="checkbox" name="permisos[]" value="usuarios"> usuarios</label><br>
-                <label><input type="checkbox" name="permisos[]" value="perfiles"> perfiles</label>
+                <label><input type="checkbox" name="permisos" value="superadmin"> superadmin</label><br>
+                <label><input type="checkbox" name="permisos" value="admin"> admin</label><br>
+                <label><input type="checkbox" name="permisos" value="categorias"> categorias</label><br>
+                <label><input type="checkbox" name="permisos" value="marcas"> marcas</label><br>
+                <label><input type="checkbox" name="permisos" value="comentarios"> comentarios</label><br>
+                <label><input type="checkbox" name="permisos" value="productos"> productos</label><br>
+                <label><input type="checkbox" name="permisos" value="usuarios"> usuarios</label><br>
+                <label><input type="checkbox" name="permisos" value="perfiles"> perfiles</label>
             </fieldset>
-            <button type="submit">Crear perfil</button>
+            <button type="submit" class="procesar">Crear perfil</button>
         </form>
+        </section>
     </main>
+    <?php include_once '../../app/includes/footer_admin.php'; ?>
 </body>
 </html>

@@ -42,12 +42,13 @@ require_once '../../app/includes/database.php';
         <section>
             <h1>Creación de Marcas</h1>
             <form action="editar_marca.php" method="POST">
-                <label for="nombre">Nombre:</label>
-                <input type="text" name="nombre" required>
-                <button type="submit">Crear marca</button>
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" name="nombre" required><br>
+                <button type="submit" class="procesar">Crear marca</button>
             </form>
         </section>
         
     </main>
+    <?php include_once '../../app/includes/footer_admin.php'; ?>
 </body>
 </html>

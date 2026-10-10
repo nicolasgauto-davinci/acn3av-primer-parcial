@@ -131,5 +131,6 @@ if (isset($_GET['id'])) {
         </section>
         <div><a href="productos.php">Volver al listado de productos</a></div>
     </main>
+    <?php include_once '../../app/includes/footer_admin.php'; ?>
 </body>
 </html>

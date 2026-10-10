@@ -18,13 +18,13 @@ require_once '../../app/includes/database.php';
         <h1>Panel de Administración</h1>
         <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['email']); ?>!</p>
         <section class="grid-admin-home">
-            <a href="./productos.php">Administrar Productos</a>
-            <a href="./categorias.php">Administrar Categorías</a>
-            <a href="./marcas.php">Administrar Marcas</a>
-            <a href="./usuarios.php">Administrar Usuarios</a>
+            <a href="./productos.php">Administrar Productos</a><br>
+            <a href="./categorias.php">Administrar Categorías</a><br>
+            <a href="./marcas.php">Administrar Marcas</a><br>
+            <a href="./usuarios.php">Administrar Usuarios</a><br>
             <a href="./perfiles.php">Administrar Perfiles</a>
         </section>
     </main>
-    
+    <?php include_once '../../app/includes/footer_admin.php'; ?>
 </body>
 </html>
