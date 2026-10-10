@@ -17,5 +17,6 @@ session_start();
         <p>La página que busca no existe.</p>
         <a href="./public/home.php">Volver al inicio</a>
     </main>
+    <?php include_once './app/includes/footer_public.php'; ?>
 </body>
 </html>
